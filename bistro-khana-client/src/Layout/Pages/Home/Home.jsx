@@ -15,6 +15,7 @@ const Home = () => {
             <div className='max-w-7xl mx-auto mb-24'>
                 <Description></Description>
             </div>
+            <SharedTitle headline={"Check it out"} subheadline={"from our menu"} ></SharedTitle>
         </div>
     );
 };
