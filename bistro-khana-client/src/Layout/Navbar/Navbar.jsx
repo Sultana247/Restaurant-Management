@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router';
-import logo from '../../assets/logo.png'
 const Navbar = () => {
     const navoptions =
         <>
@@ -13,7 +12,7 @@ const Navbar = () => {
         </>
     return (
         <div>
-            <div className="navbar bg-black shadow-sm px-15 py-7 text-white">
+            <div className="navbar bg-black opacity-70 shadow-sm px-15 py-4 fixed z-10 text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

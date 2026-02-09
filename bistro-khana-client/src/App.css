@@ -14,3 +14,12 @@
   font-optical-sizing: auto;
     font-style: normal;
 }
+.subheadline{
+  color: #D99904;
+}
+.dark-6{
+  color: #E8E8E8;
+}
+.service{
+  background-image: '../src/assets/home/chef-service.jpg';
+}
