@@ -3,10 +3,10 @@ import { NavLink } from 'react-router';
 const Navbar = () => {
     const navoptions =
         <>
-            <NavLink className='uppercase font-bold text-xl inter-font'><li><a>Contact us</a></li></NavLink>
-            <NavLink className='uppercase font-bold text-xl inter-font'><li><a>Home</a></li></NavLink>
-            <NavLink className='uppercase font-bold text-xl inter-font'><li><a>Our menu</a></li></NavLink>
-            <NavLink className='uppercase font-bold text-xl inter-font'><li><a>Our Shop</a></li></NavLink>
+            <NavLink className='uppercase font-bold text-xl inter-font'><li>Home</li></NavLink>
+            <NavLink className='uppercase font-bold text-xl inter-font'><li>Contact us</li></NavLink>
+            <NavLink className='uppercase font-bold text-xl inter-font'><li>Our menu</li></NavLink>
+            <NavLink className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
         
 
         </>
@@ -31,7 +31,7 @@ const Navbar = () => {
 
                 <div className="navbar-end">
                     <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">
+                        <ul className="menu menu-horizontal px-1 flex gap-5">
                             {navoptions}
                         </ul>
                     </div>

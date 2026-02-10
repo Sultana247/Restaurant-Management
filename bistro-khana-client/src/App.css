@@ -23,3 +23,23 @@
 .service{
   background-image: '../src/assets/home/chef-service.jpg';
 }
+.dark-3{
+  color: #737373;
+}
+.dark1-bg{
+  background-color: #151515;
+}
+.raleway-font {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.cart-color{
+  color: #BB8506;
+}
+.dark7-bg{
+  background-color: #F3F3F3;
+}
+.rating-color{
+  background-color: #CD9003;
+}
