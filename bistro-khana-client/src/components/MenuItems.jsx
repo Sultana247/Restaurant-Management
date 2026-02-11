@@ -10,6 +10,7 @@ const MenuItems = ({item}) => {
                 <p className='text-[16px] inter-font dark-3'>{recipe}</p>
             </div>
             <p className='subheadline inter-font text-xl'>${price}</p>
+            
         </div>
     );
 };

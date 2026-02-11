@@ -6,7 +6,7 @@ const Navbar = () => {
             <NavLink className='uppercase font-bold text-xl inter-font'><li>Home</li></NavLink>
             <NavLink className='uppercase font-bold text-xl inter-font'><li>Contact us</li></NavLink>
             <NavLink to={'/ourmenu'} className='uppercase font-bold text-xl inter-font'><li>Our menu</li></NavLink>
-            <NavLink to={'/ourshop'} className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
+            <NavLink to={`/ourshop/${'salad'}`} className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
         
 
         </>

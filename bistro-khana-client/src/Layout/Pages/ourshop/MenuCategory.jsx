@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChefRecommends = ({ item }) => {
+const MenuCategory = ({item}) => {
     const { image, name, recipe } = item
     return (
         <div className="bg-base-100 w-96 shadow-sm">
@@ -23,4 +23,4 @@ const ChefRecommends = ({ item }) => {
     );
 };
 
-export default ChefRecommends;
+export default MenuCategory;
