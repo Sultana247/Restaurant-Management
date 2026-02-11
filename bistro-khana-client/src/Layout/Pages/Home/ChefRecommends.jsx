@@ -15,7 +15,7 @@ const ChefRecommends = ({ item }) => {
                     <h2 className=" inter-font font-semibold text-2xl">{name}</h2>
                     <p className='inter-font text-[16px] mt-2'>{recipe}</p>
                     <div className=" ">
-                        <button className="btn cart-color border-b-4 rounded-lg py-5 px-6 mt-6 border-b-[#BB8506] inter-font font-medium text-xl uppercase">Add to cart</button>
+                        <button className="cart-color btn btn-neutral border-0 btn-outline border-b-4 rounded-lg py-5 px-6 mt-6 border-b-[#BB8506] inter-font font-medium text-xl uppercase">Add to cart</button>
                     </div>
                 </div>
             </div>

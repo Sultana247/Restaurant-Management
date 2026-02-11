@@ -16,6 +16,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { Link } from 'react-router';
+import {Helmet} from "react-helmet";
 const Home = () => {
     const { menu } = useMenu();
     const { reviews } = useReview();
@@ -23,8 +25,13 @@ const Home = () => {
 
     return (
         <div>
-            <Banner></Banner>
-            <SharedTitle headline={"From 11:00am to 10:00pm"} subheadline={"order online"}></SharedTitle>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
+            <div className='mx-auto'>
+                <Banner></Banner>
+            </div>
+            <SharedTitle headline={"From 11:00am to 10:00pm"} subheadline={"Order online"}></SharedTitle>
             <div className='max-w-7xl mx-auto mb-24'>
                 <MenuSwiper></MenuSwiper>
             </div>
@@ -36,7 +43,7 @@ const Home = () => {
                 {popular.map(item => <PopularMenu item={item} key={item._id}></PopularMenu>)}
             </div>
             <div className='flex justify-center'>
-                <button className=' border-b-4 rounded-xl py-3 px-5 mb-28 text-xl font-medium inter-font uppercase'>view full menu</button>
+                <Link to={"/ourmenu"}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>view full menu</button></Link>
             </div>
             <div className='max-w-7xl mx-auto mb-24 dark1-bg py-24'>
                 <p className='raleway-font text-[50px] text-white text-center'>Call Us: +88 0192345678910</p>
@@ -63,7 +70,7 @@ const Home = () => {
                                 <h1 className='inter-font my-4  text-4xl uppercase text-white'>from our menu</h1>
                             </div>
                         </div>
-                        <div className='flex gap-8 max-w-7xl mx-auto items-center'>
+                        <div className='flex flex-col md:flex-row gap-8 max-w-7xl mx-auto items-center'>
                             <img src={featureimg} alt="" className='w-[550px] h-[350px]' />
                             <div className='text-left'>
                                 <h1 className="mb-2 text-2xl inter-font">March 20, 2023</h1>
@@ -71,7 +78,7 @@ const Home = () => {
                                 <p className="mb-5 text-xl inter-font">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.
                                 </p>
-                                <button className="bg-transparent border-b-4 rounded-lg py-5 px-6 mt-6 border-b-white text-white inter-font font-medium text-xl uppercase">Read more</button>
+                                <button className=" btn btn-neutral btn-outline border-0 border-b-4 rounded-lg py-5 px-6 mt-6 border-b-white text-white inter-font font-medium text-xl uppercase">Read more</button>
                             </div>
                         </div>
                     </div>
