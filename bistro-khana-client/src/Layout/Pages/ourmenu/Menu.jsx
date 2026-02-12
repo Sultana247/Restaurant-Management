@@ -29,7 +29,7 @@ const Menu = () => {
                 {offered.map(item=><MenuItems item={item} key={item._id}></MenuItems>)}
             </div>
             <div className='flex justify-center'>
-                <Link to={`/ourshop/${'salad'}`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
+                <Link to={`/ourshop/salad`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
             </div>
             {/* desert section */}
             <Cover img={dessertImg} title={"desserts"} desc={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}></Cover>
@@ -37,7 +37,7 @@ const Menu = () => {
                 {dessert.map(item=><MenuItems item={item} key={item._id}></MenuItems>)}
             </div>
             <div className='flex justify-center'>
-                <Link to={`/ourshop/${'dessert'}`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
+                <Link to={`/ourshop/dessert`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
             </div>
 
             {/* pizza section */}
@@ -46,7 +46,7 @@ const Menu = () => {
                 {pizza.map(item=><MenuItems item={item} key={item._id}></MenuItems>)}
             </div>
             <div className='flex justify-center'>
-                <Link to={`/ourshop/${'pizza'}`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
+                <Link to={`/ourshop/pizza`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
             </div>
 
             {/* salad section */}
@@ -55,7 +55,7 @@ const Menu = () => {
                 {salad.map(item=><MenuItems item={item} key={item._id}></MenuItems>)}
             </div>
             <div className='flex justify-center'>
-                <Link to={`/ourshop/${'salad'}`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
+                <Link to={`/ourshop/salad`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
             </div>
 
             {/* soup section */}
@@ -64,7 +64,7 @@ const Menu = () => {
                 {soup.map(item=><MenuItems item={item} key={item._id}></MenuItems>)}
             </div>
             <div className='flex justify-center'>
-                <Link to={`/ourshop/${'soup'}`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
+                <Link to={`/ourshop/soup`}><button className='rounded-xl py-5 px-2 btn btn-neutral border-0 btn-outline border-b-black  border-b-4 mb-28 text-xl font-medium inter-font uppercase'>order your favourite food</button></Link>
             </div>
 
             
