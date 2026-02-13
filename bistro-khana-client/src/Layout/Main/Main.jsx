@@ -1,14 +1,24 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer';
 
 const Main = () => {
+    const location = useLocation();
+    const noNavFooter = location.pathname === '/login' || location.pathname === '/signup'
     return (
         <div className='cinzel-font'>
-            <Navbar></Navbar>
+            {noNavFooter ?
+                <></>
+                :
+                <Navbar></Navbar>
+            }
             <Outlet></Outlet>
-            <Footer></Footer>
+            {noNavFooter ?
+                <></>
+                :
+                <Footer></Footer>
+            }
         </div>
     );
 };

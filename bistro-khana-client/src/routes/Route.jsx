@@ -5,6 +5,8 @@ import Home from "../Layout/Pages/Home/Home";
 import Shop from "../Layout/Pages/ourshop/Shop";
 import Menu from "../Layout/Pages/ourmenu/Menu";
 import Contactus from "../Layout/Pages/contact/Contactus";
+import Login from "../Layout/Pages/Authentication/Login";
+import SignUp from "../Layout/Pages/Authentication/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +28,15 @@ export const router = createBrowserRouter([
         {
           path: '/contactus',
           element: <Contactus></Contactus>
-        }
+        },
+        {
+          path: '/login',
+          element: <Login></Login>
+        },
+        {
+          path: '/signup',
+          element: <SignUp></SignUp>
+        },
     ]
   },
 ]);
