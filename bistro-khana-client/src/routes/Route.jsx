@@ -7,6 +7,9 @@ import Menu from "../Layout/Pages/ourmenu/Menu";
 import Contactus from "../Layout/Pages/contact/Contactus";
 import Login from "../Layout/Pages/Authentication/Login";
 import SignUp from "../Layout/Pages/Authentication/SignUp";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import Cart from "../Layout/Pages/Cart/Cart";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +40,18 @@ export const router = createBrowserRouter([
           path: '/signup',
           element: <SignUp></SignUp>
         },
+        {
+        path: "/carts",
+        element: <PrivateRoute><Cart></Cart></PrivateRoute>
+      }
     ]
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children:[
+      
+    ]
+  }
 ]);
 

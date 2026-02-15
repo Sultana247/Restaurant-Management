@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json())
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.g6z9mma.mongodb.net/?appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -32,6 +32,8 @@ async function run() {
     // create db and table
     const menuCollection = client.db("BistroBoss").collection("menu");
     const reviewsCollection = client.db("BistroBoss").collection("reviews");
+    const cartCollection = client.db("BistroBoss").collection('cart');
+
     app.get('/menu', async(req, res)=>{
         const result = await menuCollection.find({}).toArray();
         res.send(result)
@@ -41,6 +43,28 @@ async function run() {
         const result = await reviewsCollection.find({}).toArray();
         res.send(result)
     });
+    // add to cart
+    app.post('/carts', async(req, res)=>{
+      const query = req.body.cart;
+      
+      const result = await cartCollection.insertOne(query);
+      res.send(result)
+    });
+    // get info from cart
+    app.get('/carts', async(req, res)=>{
+      const email = req.query.email;
+      const query = {email: email}
+      const result = await cartCollection.find(query).toArray()
+      res.send(result)
+    })
+    // delete item
+    app.delete('/carts/:id', async(req, res)=>{
+      const id = req.params.id
+      console.log(id)
+      const query = {_id: new ObjectId(id)}
+      const result = await cartCollection.deleteOne(query)
+      res.send(result)
+    })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");

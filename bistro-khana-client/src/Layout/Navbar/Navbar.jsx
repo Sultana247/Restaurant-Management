@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
 import AuthContext from '../../Provider/AuthContext';
 import Swal from 'sweetalert2';
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
+import useCart from '../../hooks/useCart';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
+    const [cart] = useCart();
     const handleSignOut = () => {
         logout()
             .then(() => {
@@ -43,6 +45,11 @@ const Navbar = () => {
             <NavLink to={'/contactus'} className='uppercase font-bold text-xl inter-font'><li>Contact us</li></NavLink>
             <NavLink to={'/ourmenu'} className='uppercase font-bold text-xl inter-font'><li>Our menu</li></NavLink>
             <NavLink to={`/ourshop/salad`} className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
+            <NavLink to={`/carts`} className='uppercase font-bold text-xl inter-font'><li>
+                <button className="btn">
+                    <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{cart.length}</div>
+                </button>
+            </li></NavLink>
 
         </>
     return (

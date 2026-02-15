@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import authBgImg from '../../../assets/others/authentication.png'
 import auth2 from '../../../assets/others/authentication2.png'
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import AuthContext from '../../../Provider/AuthContext';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const [disableSubmit, setDisabledSubmit]=useState(true);
+    const location = useLocation();
     const { register, handleSubmit, formState: { errors } } = useForm()
     // handle captcha
     const handleCaptcha =()=>{
@@ -36,7 +37,8 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate('/')
+                console.log(user)
+                navigate(location.state?.from || '/')
             })
             .catch(error => {
                console.log(error.me)
@@ -71,7 +73,7 @@ const Login = () => {
                                     
                                     <LoadCanvasTemplate />
                                     
-                                    <input type="text" onBlur={handleCaptcha} className='input' id='captcha' />
+                                    <input type="text" onBlur={handleCaptcha} className='input' id='captcha' placeholder='Type above text here' />
                                     <input type="submit" disabled={disableSubmit? true : false}  className='btn bg-[#D1A054] font-bold text-white text-xl mt-5 ' value={'Sign In'} />
                                 </fieldset>
                             </form>

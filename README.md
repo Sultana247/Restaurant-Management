@@ -10,6 +10,8 @@ Features
 7. Used react tabs on our shop page 
 8. used react-hook-form for login and sign up form
 9. used react recaptcha in login page
+10. used sweet alert
+11. Aded cart
 =======
 
 >>>>>>> 3f895ac641a1371d614a7715d01c830f84389e9c
