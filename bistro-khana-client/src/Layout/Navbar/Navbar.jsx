@@ -45,7 +45,7 @@ const Navbar = () => {
             <NavLink to={'/contactus'} className='uppercase font-bold text-xl inter-font'><li>Contact us</li></NavLink>
             <NavLink to={'/ourmenu'} className='uppercase font-bold text-xl inter-font'><li>Our menu</li></NavLink>
             <NavLink to={`/ourshop/salad`} className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
-            <NavLink to={`/carts`} className='uppercase font-bold text-xl inter-font'><li>
+            <NavLink to={`/dashboard/carts`} className='uppercase font-bold text-xl inter-font'><li>
                 <button className="btn">
                     <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{cart.length}</div>
                 </button>
