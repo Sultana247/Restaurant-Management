@@ -1,16 +1,29 @@
 import React from 'react';
 import useCart from '../../../hooks/useCart';
 import CartItem from './CartItem';
+import SharedTitle from '../../../components/SharedTitle';
 
 const Cart = () => {
     const [cart]=useCart();
+    const price = cart.map(item=>item.price)
+    console.log(price)
+    const totalprice = price?.reduce((accumulator, currentvalue)=> accumulator + currentvalue, 0)
+    console.log(totalprice)
 
     return (
-        <div className="overflow-x-auto md:pt-20 md:pb-20 lg:pt-50 lg:pb-50 p-5">
-            <table className="table">
+        <div className="overflow-x-auto p-5  ">
+            <SharedTitle headline={'wanna add more'} subheadline={'My Cart'}></SharedTitle>
+            <div className='bg-white p-25 '>
+                <div className='font-bold text-3xl flex justify-between mb-5'>
+                    <h3>Total Orders: {cart.length}</h3>
+                <h3>Total Price: ${totalprice}</h3>
+                <button className='dashboard-bg px-5 py-2 rounded-lg text-xl text-white'>Pay</button>
+                </div>
+            <table className="table ">
+                
                 {/* head */}
-                <thead>
-                    <tr>
+                <thead className='dashboard-bg text-white '>
+                    <tr >
                         <th>
                             <label>
                                 <input type="checkbox" className="checkbox" />
@@ -19,7 +32,8 @@ const Cart = () => {
                         <th className='font-bold text-xl'>Foods</th>
                         <th className='font-bold text-xl'>Name</th>
                         <th className='font-bold text-xl'>Price</th>
-                        <th></th>
+                        <th className='font-bold text-xl'>Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +42,7 @@ const Cart = () => {
                 </tbody>
                 
             </table>
+            </div>
         </div>
     );
 };
