@@ -1,7 +1,8 @@
 import React from 'react';
-import useCart from '../../../hooks/useCart';
+
+import SharedTitle from '../../../../../components/SharedTitle';
+import useCart from '../../../../../hooks/useCart';
 import CartItem from './CartItem';
-import SharedTitle from '../../../components/SharedTitle';
 
 const Cart = () => {
     const [cart]=useCart();

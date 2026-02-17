@@ -6,6 +6,8 @@ import AuthContext from '../../../Provider/AuthContext';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import SocialLogin from './SocialLogin';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
@@ -50,6 +52,9 @@ const Login = () => {
     },[])
     return (
         <div style={{ backgroundImage: `url(${authBgImg})` }} className='w-full min-h-screen pt-25'>
+            <Helmet>
+                <title>Bistro Boss | SignIn</title>
+            </Helmet>
             <div className="hero flex flex-col md:flex-row justify-center items-center ">
                 <div className="hero-content flex-col lg:flex-row-reverse shadow-2xl shadow-[#00000040]  border-gray-300 border p-15">
                     <div className="card  w-full max-w-sm shrink-0">
@@ -75,9 +80,12 @@ const Login = () => {
                                     
                                     <input type="text" onBlur={handleCaptcha} className='input' id='captcha' placeholder='Type above text here' />
                                     <input type="submit" disabled={disableSubmit? true : false}  className='btn bg-[#D1A054] font-bold text-white text-xl mt-5 ' value={'Sign In'} />
+                                    
                                 </fieldset>
                             </form>
+                            <SocialLogin></SocialLogin>
                             <Link to={'/signup'}  className='text-lg authtext'>New here? Create a New Account</Link>
+                            
                         </div>
                     </div>
                     <div className="text-center lg:text-left">

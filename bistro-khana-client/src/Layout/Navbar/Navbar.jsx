@@ -14,7 +14,7 @@ const Navbar = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "You logged in successfully!",
+                    title: "Logged OUT!",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -78,8 +78,8 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                <div className="navbar-end flex  gap-5">
-                    <div className="relative text-[16px] z-20 -mt-5">
+                <div className="navbar-end flex gap-5">
+                    <div className="relative text-[16px] ">
                         <span className=" text-white">{user?.displayName}</span>
                     </div>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ">
@@ -90,7 +90,7 @@ const Navbar = () => {
 
                                     <img
                                         alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                        src={user.photoURL} />
 
                                 </>
 

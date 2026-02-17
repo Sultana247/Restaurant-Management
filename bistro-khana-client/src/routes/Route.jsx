@@ -8,8 +8,10 @@ import Contactus from "../Layout/Pages/contact/Contactus";
 import Login from "../Layout/Pages/Authentication/Login";
 import SignUp from "../Layout/Pages/Authentication/SignUp";
 import Dashboard from "../Layout/Dashboard/Dashboard";
-import Cart from "../Layout/Pages/Cart/Cart";
+
 import PrivateRoute from "./PrivateRoute";
+import Cart from "../Layout/Pages/Dashboard/Client/Cart/Cart";
+import Allusers from "../Layout/Pages/Dashboard/Admin/Allusers";
 
 export const router = createBrowserRouter([
   {
@@ -47,21 +49,51 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children:[
+      // clients
        {
         path: "/dashboard/carts",
         element: <Cart></Cart>
       },
       {
         path: "/dashboard/userHome",
-        element: <Cart></Cart>
+        element: <h2>User home</h2>
       },
       {
-        path: "/dashboard/carts",
-        element: <Cart></Cart>
+        path: "/dashboard/reservation",
+        element: <h2>Reservation</h2>
       },
       {
-        path: "/dashboard/carts",
-        element: <Cart></Cart>
+        path: "/dashboard/payment",
+        element: <h2>Payment</h2>
+      },
+      {
+        path: "/dashboard/myBooking",
+        element: <h2>my bookings</h2>
+      },
+      {
+        path: "/dashboard/review",
+        element: <h2>Review</h2>
+      },
+      // admin
+      {
+        path: "/dashboard/adminHome",
+        element: <h2>Admin home</h2>
+      },
+      {
+        path: "/dashboard/additems",
+        element: <h2>Add new items</h2>
+      },
+      {
+        path: "/dashboard/manageitems",
+        element: <h2>Manage Items</h2>
+      },
+      {
+        path: "/dashboard/manageBooking",
+        element: <h2>Manage Bookings</h2>
+      },
+      {
+        path: "/dashboard/allusers",
+        element: <Allusers></Allusers>
       },
     ]
   }

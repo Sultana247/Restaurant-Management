@@ -33,7 +33,47 @@ async function run() {
     const menuCollection = client.db("BistroBoss").collection("menu");
     const reviewsCollection = client.db("BistroBoss").collection("reviews");
     const cartCollection = client.db("BistroBoss").collection('cart');
+    const userCollection = client.db("BistroBoss").collection('users');
 
+// users api
+    app.post('/users', async(req, res)=>{
+      const user = req.body;
+      // check if user exists
+      const query = {email: user.email}
+      const existinguser = await userCollection.findOne(query)
+      if(existinguser){
+        return({message: "User already Existed", insertedId: null})
+      }
+      const result = await userCollection.insertOne(user);
+      res.send(result)
+    });
+    app.get('/users', async(req, res)=>{
+      const users = await userCollection.find({}).toArray();
+      res.send(users)
+    });
+    app.delete('/users/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+    });
+    app.patch('/users/admin/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const updateDoc={
+        $set:{
+          role: 'admin'
+        }
+      }
+      const result = await userCollection.updateOne(query, updateDoc);
+      res.send(result)
+    });
+    // check if the user admin or not
+    app.get('/users/admin/:id', async(req, res)=>{
+      const id = req.params.id;
+      
+    })
+    // Menu api
     app.get('/menu', async(req, res)=>{
         const result = await menuCollection.find({}).toArray();
         res.send(result)

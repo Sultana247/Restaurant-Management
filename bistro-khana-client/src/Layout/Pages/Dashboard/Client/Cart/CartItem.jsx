@@ -1,8 +1,8 @@
 import React from 'react';
 import { MdDelete } from 'react-icons/md';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAxiosSecure from '../../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-import useCart from '../../../hooks/useCart';
+import useCart from '../../../../../hooks/useCart';
 const CartItem = (cart) => {
     const axiosSecure = useAxiosSecure()
     const { item } = cart;

@@ -29,10 +29,10 @@ const Dashboard = () => {
                                 {isAdmin ?
                                     <>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={`/dashboard/adminHome`}><FaHome></FaHome> Admin home</NavLink></li>
-                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/reservation'}><FaUtensils></FaUtensils> Add items</NavLink></li>
-                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/payment'}><FaListAlt></FaListAlt> Manage Items</NavLink></li>
-                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/carts'}><FaBook></FaBook> Manage Bookings</NavLink></li>
-                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/review'}><FaUsers></FaUsers> All users</NavLink></li>
+                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/additems'}><FaUtensils></FaUtensils> Add items</NavLink></li>
+                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/manageitems'}><FaListAlt></FaListAlt> Manage Items</NavLink></li>
+                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/manageBooking'}><FaBook></FaBook> Manage Bookings</NavLink></li>
+                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/allusers'}><FaUsers></FaUsers> All users</NavLink></li>
                                     </>
                                     :
                                     <>
