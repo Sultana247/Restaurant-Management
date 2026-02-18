@@ -6,10 +6,8 @@ import CartItem from './CartItem';
 
 const Cart = () => {
     const [cart]=useCart();
-    const price = cart.map(item=>item.price)
-    console.log(price)
+    const price = cart?.map(item=>item.price)
     const totalprice = price?.reduce((accumulator, currentvalue)=> accumulator + currentvalue, 0)
-    console.log(totalprice)
 
     return (
         <div className="overflow-x-auto p-5  ">

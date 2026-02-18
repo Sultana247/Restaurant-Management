@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaBook, FaCalendarAlt, FaCalendarDay, FaHome, FaList, FaListAlt, FaShoppingBag, FaShoppingCart, FaUser, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router';
 import { BiSolidMessageAltDetail } from "react-icons/bi";
 import { FaMessage } from 'react-icons/fa6';
 import { push as Menu } from 'react-burger-menu'
 import './dashboard.css'
+import AuthContext from '../../Provider/AuthContext';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 const Dashboard = () => {
-    const isAdmin = true;
+    const [admin, setAdmin]= useState(false);
+    const {user}=useContext(AuthContext)
+    const axiosSecure = useAxiosSecure();
+    useEffect(()=>{
+        axiosSecure.get(`/users/${user.email}`)
+        .then(res=>{
+            setAdmin(res.data.admin)
+        })
+    })
+    
     return (
         <div className='flex cinzel-font dark7-bg min-h-screen '>
             <div className='w-1/12 ' id="outer-container">
@@ -26,7 +37,7 @@ const Dashboard = () => {
                                 <h3 className=' font-bold text-[26px]'>Bistro Boss</h3>
                                 <h4 className=' font-bold text-lg mb-20'>R e s t a u r a n t</h4>
                                 {/* Sidebar content here */}
-                                {isAdmin ?
+                                {admin ?
                                     <>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={`/dashboard/adminHome`}><FaHome></FaHome> Admin home</NavLink></li>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/additems'}><FaUtensils></FaUtensils> Add items</NavLink></li>

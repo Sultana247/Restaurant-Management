@@ -1,12 +1,32 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config()
 const port = process.env.PORT || 5000
 
 // middle ware
 app.use(cors());
 app.use(express.json())
+
+// verify token middleware
+const verifyToken = (req, res, next)=>{
+  if(!req.headers.authorization){
+    return res.status(401).send({message: 'Forbidden Access'});
+  }
+  const token = req.headers.authorization.split(' ')[1]
+  if(!token){
+    return res.status(401).send({message: 'Forbidden Access'});
+  }
+  // verify token
+  jwt.verify(token, process.env.ACCES_TOKEN, (err, decoded)=>{
+    if(err){
+      return res.status(401).send({message: 'Forbidden Access'});
+    }
+    req.decoded = decoded;
+    next();
+  })
+}
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -35,21 +55,53 @@ async function run() {
     const cartCollection = client.db("BistroBoss").collection('cart');
     const userCollection = client.db("BistroBoss").collection('users');
 
+// verify admin middleware
+const verifyAdmin = async(req, res, next)=>{
+  const email = req.decoded.email;
+  const query = {email: email}
+  const user = await userCollection.findOne(query);
+  const isAdmin = user?.role === 'admin';
+  if(!isAdmin){
+    return res.status(403).send({message: 'Forbidden Access'});
+  }
+  next();
+}
+
+    // jwt token generate and send to client side local storage
+    app.post('/jwt', async(req, res)=>{
+      const user = req.body;
+      const token = jwt.sign(user, process.env.ACCES_TOKEN, {
+        expiresIn: '1h'
+      });
+      res.send({token})
+    })
 // users api
-    app.post('/users', async(req, res)=>{
+    app.post('/users',  async(req, res)=>{
       const user = req.body;
       // check if user exists
       const query = {email: user.email}
-      const existinguser = await userCollection.findOne(query)
+      const existinguser = await userCollection.findOne(query);
       if(existinguser){
         return({message: "User already Existed", insertedId: null})
       }
       const result = await userCollection.insertOne(user);
       res.send(result)
     });
-    app.get('/users', async(req, res)=>{
+    app.get('/users', verifyToken, async(req, res)=>{
       const users = await userCollection.find({}).toArray();
       res.send(users)
+    });
+    app.get('/users/:email', verifyToken, async(req, res)=>{
+      const email = req.params.email;
+      const query = {email: email}
+      const user = await userCollection.findOne(query);
+      console.log(user)
+      let admin=false;
+      if(user?.role){
+        admin = true;
+      }
+      
+      res.send({admin})
     });
     app.delete('/users/:id', async(req, res)=>{
       const id = req.params.id;
@@ -57,7 +109,7 @@ async function run() {
       const result = await userCollection.deleteOne(query);
       res.send(result);
     });
-    app.patch('/users/admin/:id', async(req, res)=>{
+    app.patch('/users/admin/:id', verifyToken, async(req, res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const updateDoc={
@@ -69,10 +121,25 @@ async function run() {
       res.send(result)
     });
     // check if the user admin or not
-    app.get('/users/admin/:id', async(req, res)=>{
-      const id = req.params.id;
+    app.get('/users/admin/:email', verifyToken, verifyAdmin, async(req, res)=>{
+      const email= req.params.email;
+      // check if the user trying to access own email or not
+      if(email !== req.decoded.email){
+        return res.status(403).send({message: 'Unauthorized access'})
+      }
+      const query ={email: email}
+      const existinguser = await userCollection.findOne(query)
+      let admin = false;
       
-    })
+      if(existinguser){
+        admin = existinguser.role === 'admin'
+        console.log(admin)
+      }
+      res.send({admin})
+      
+    });
+
+
     // Menu api
     app.get('/menu', async(req, res)=>{
         const result = await menuCollection.find({}).toArray();
@@ -84,14 +151,14 @@ async function run() {
         res.send(result)
     });
     // add to cart
-    app.post('/carts', async(req, res)=>{
+    app.post('/carts', verifyToken, async(req, res)=>{
       const query = req.body.cart;
       
       const result = await cartCollection.insertOne(query);
       res.send(result)
     });
     // get info from cart
-    app.get('/carts', async(req, res)=>{
+    app.get('/carts', verifyToken, async(req, res)=>{
       const email = req.query.email;
       const query = {email: email}
       const result = await cartCollection.find(query).toArray()

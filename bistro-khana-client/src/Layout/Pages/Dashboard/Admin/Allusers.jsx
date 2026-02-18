@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import SharedTitle from '../../../../components/SharedTitle';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
@@ -6,9 +6,10 @@ import { FaUser, FaUsers } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import AuthContext from '../../../../Provider/AuthContext';
+import useAdmin from '../../../../hooks/useAdmin';
 
 const Allusers = () => {
-    const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const axiosSecure = useAxiosSecure();
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -28,7 +29,7 @@ const Allusers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                refetch()
+                refetch();
                 axiosSecure.delete(`/users/${id}`)
                     .then(res => {
 
@@ -49,13 +50,13 @@ const Allusers = () => {
 
     }
 
-    const handleRole = id => {
+    const handleRole = (id, name) => {
         axiosSecure.patch(`/users/admin/${id}`)
             .then(res => {
 
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
-                        title: `${user.displayName} is an Admin now!`,
+                        title: `${name} is an Admin now!`,
                         showClass: {
                             popup: `
                                                    animate__animated
@@ -71,6 +72,7 @@ const Allusers = () => {
                                                    `
                         }
                     });
+                    refetch();
                 }
             })
     }
@@ -103,7 +105,7 @@ const Allusers = () => {
                     </thead>
                     <tbody>
                         {users.map((user, index) =>
-                            <tr key={user._id}>
+                            <tr className='inter-font' key={user._id}>
                                 <th>
                                     <label>
                                         {index + 1}
@@ -116,7 +118,10 @@ const Allusers = () => {
                                     {user.email}
                                 </td>
                                 <td>
-                                    <button onClick={() => { handleRole(user._id) }} className="dashboard-bg  p-2 text-white rounded-lg"><FaUsers className='text-3xl'></FaUsers></button>
+                                    {user.role ? 'Admin'
+                                    :
+                                    <button onClick={() => { handleRole(user._id, user.name) }} className="btn dashboard-bg  p-2 text-white rounded-lg"><FaUsers className='text-3xl'></FaUsers></button>
+                                    }
 
                                 </td>
                                 <th>

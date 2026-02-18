@@ -12,6 +12,7 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "../Layout/Pages/Dashboard/Client/Cart/Cart";
 import Allusers from "../Layout/Pages/Dashboard/Admin/Allusers";
+import PrivateAdminRoute from "./PrivateAdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -77,23 +78,23 @@ export const router = createBrowserRouter([
       // admin
       {
         path: "/dashboard/adminHome",
-        element: <h2>Admin home</h2>
+        element: <PrivateAdminRoute><h2>Admin Home</h2></PrivateAdminRoute>
       },
       {
         path: "/dashboard/additems",
-        element: <h2>Add new items</h2>
+        element: <PrivateAdminRoute><h2>Add new items</h2></PrivateAdminRoute>
       },
       {
         path: "/dashboard/manageitems",
-        element: <h2>Manage Items</h2>
+        element: <PrivateAdminRoute><h2>Manage items</h2></PrivateAdminRoute>
       },
       {
         path: "/dashboard/manageBooking",
-        element: <h2>Manage Bookings</h2>
+        element: <PrivateAdminRoute><h2>Manage Bookings</h2></PrivateAdminRoute>
       },
       {
         path: "/dashboard/allusers",
-        element: <Allusers></Allusers>
+        element: <PrivateAdminRoute><Allusers></Allusers></PrivateAdminRoute>
       },
     ]
   }
