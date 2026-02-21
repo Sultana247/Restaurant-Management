@@ -3,16 +3,55 @@ import SharedTitle from '../../../../components/SharedTitle';
 import useMenu from '../../../../hooks/useMenu';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const ManageItem = () => {
-    const { menu } = useMenu();
-    console.log(menu)
+    const [menu, loadingMenu, refetch] = useMenu();
+    const axiosSecure = useAxiosSecure();
+    if (loadingMenu) {
+        return <div className='flex justify-center items-center m-25'>
+            <span className="loading loading-infinity loading-xl"></span>
+        </div>
+    }
+
+    const handleDelete = (id, item) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/menu/${id}`)
+                    .then(res => {
+
+                        if (res.data.deletedCount > 0) {
+                            
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${item.name} has been deleted`,
+                                icon: "success"
+                            });
+                            refetch();
+                        }
+                    })
+
+            }
+        });
+       
+    }
     return (
         <div>
             <SharedTitle headline={'manage all items'} subheadline={'Hurry Up??'}></SharedTitle>
             <div className='bg-white p-25 '>
                 <div className='font-bold text-3xl flex justify-between mb-5'>
-                    <h3>Total Users: </h3>
+                    <h3>Total Items: {menu.length}</h3>
 
 
                 </div>
@@ -63,12 +102,14 @@ const ManageItem = () => {
                                 <td>
 
 
-                                    <button onClick={() => { handleRole(item._id) }} className="btn dashboard-bg  p-2 text-white rounded-lg"><FaEdit className='text-xl'></FaEdit></button>
+                                    <Link to={`/dashboard/updateitem/${item._id}`}>
+                                        <button className="btn dashboard-bg  p-2 text-white rounded-lg"><FaEdit className='text-xl'></FaEdit></button>
+                                    </Link>
 
 
                                 </td>
                                 <th>
-                                    <button onClick={() => { handleDelete(item._id) }}  className="btn bg-red-800  p-2 text-white rounded-lg"><MdDelete className=' text-xl'></MdDelete></button>
+                                    <button onClick={() => { handleDelete(item._id, item) }} className="btn bg-red-800  p-2 text-white rounded-lg"><MdDelete className=' text-xl'></MdDelete></button>
                                 </th>
                             </tr>
                         )}

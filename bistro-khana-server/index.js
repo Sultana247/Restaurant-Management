@@ -91,11 +91,11 @@ const verifyAdmin = async(req, res, next)=>{
       const users = await userCollection.find({}).toArray();
       res.send(users)
     });
-    app.get('/users/:email', verifyToken, async(req, res)=>{
+    app.get('/users/:email', async(req, res)=>{
       const email = req.params.email;
       const query = {email: email}
       const user = await userCollection.findOne(query);
-      console.log(user)
+
       let admin=false;
       if(user?.role){
         admin = true;
@@ -133,7 +133,7 @@ const verifyAdmin = async(req, res, next)=>{
       
       if(existinguser){
         admin = existinguser.role === 'admin'
-        console.log(admin)
+
       }
       res.send({admin})
       
@@ -145,15 +145,50 @@ const verifyAdmin = async(req, res, next)=>{
         const result = await menuCollection.find({}).toArray();
         res.send(result)
     });
+    app.get('/menu/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await menuCollection.findOne(query);
+      res.send(result)
+    });
     app.post('/menu', verifyToken, verifyAdmin, async(req, res)=>{
       const item = req.body;
       const result = await menuCollection.insertOne(item);
       res.send(result)
+    });
+    app.delete('/menu/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await menuCollection.deleteOne(query);
+      res.send(result);
+    });
+    app.patch('/menu/:id', async(req, res)=>{
+      const id = req.params.id;
+      const updateItem = req.body;
+      const query ={_id: new ObjectId(id)};
+      const updateDoc ={
+        $set: {
+          name: updateItem.name,
+          image: updateItem.image,
+          recipe: updateItem.recipe,
+          category: updateItem.category,
+          price: updateItem.price
+        }
+      }
+      const result = await menuCollection.updateOne(query, updateDoc);
+      res.send(result);
     })
     
     app.get('/reviews', async(req, res)=>{
         const result = await reviewsCollection.find({}).toArray();
         res.send(result)
+    });
+    app.get('/reviews/:id', async(req, res)=>{
+      const id = req.params.id
+      const query = {_id: id}
+      const result = await reviewsCollection.findOne(query);
+      console.log(result)
+      res.send(result)
     });
     // add to cart
     app.post('/carts', verifyToken, async(req, res)=>{
@@ -172,7 +207,6 @@ const verifyAdmin = async(req, res, next)=>{
     // delete item
     app.delete('/carts/:id', async(req, res)=>{
       const id = req.params.id
-      console.log(id)
       const query = {_id: new ObjectId(id)}
       const result = await cartCollection.deleteOne(query)
       res.send(result)

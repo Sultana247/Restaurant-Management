@@ -11,7 +11,7 @@ import soupImg from '../../../assets/menu/soup-bg.jpg'
 import { Link } from 'react-router';
 import { Helmet } from 'react-helmet';
 const Menu = () => {
-    const {menu}=useMenu();
+    const [menu]=useMenu();
     const offered = menu.filter(item => item.category === 'offered');
     const salad = menu.filter(item => item.category === 'salad');
     const soup = menu.filter(item => item.category === 'soup');

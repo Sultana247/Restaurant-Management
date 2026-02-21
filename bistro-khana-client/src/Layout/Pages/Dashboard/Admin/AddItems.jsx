@@ -64,7 +64,7 @@ const AddItems = () => {
                     <div className='w-1/2'>
                         <label>Category*</label>
                         <select defaultValue="Pick a browser" {...register("category")} className="select mt-4 px-6 h-12 w-full">
-                            <option disabled={true}>Select an option</option>
+                            <option disabled={true} >Select an option</option>
                             <option value={'salad'}>Salad</option>
                             <option value={'desert'}>Desert</option>
                             <option value={'soup'}>Soup</option>
@@ -88,7 +88,7 @@ const AddItems = () => {
                 <div className=' flex flex-col gap-6 mt-10'>
                     <input {...register("image", { required: true })} type="file" className="file-input file-input-ghost" />
                     <div className='flex justify-center gap-2 px-5 py-3 items-center text-white w-2/12 bg-linear-to-l from-[#B58130] to-[#835D23] '>
-                        <input type="submit" value={"Add item"} className=' ' />
+                        <input type="submit" value={"Add item"} className='' />
                         <FaUtensils />
                     </div>
                 </div>

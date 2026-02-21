@@ -12,7 +12,7 @@ const Shop = () => {
     const category = useParams();
     const categorySelected=category.category
     const initialIndex = categories.indexOf(categorySelected)
-    const {menu}= useMenu();
+    const [menu]= useMenu();
     const [tabIndex, setTabIndex]=useState(initialIndex)
     const drinks = menu.filter(item => item.category === 'drinks');
     const salad = menu.filter(item => item.category === 'salad');

@@ -12,7 +12,7 @@ const Dashboard = () => {
     const {user}=useContext(AuthContext)
     const axiosSecure = useAxiosSecure();
     useEffect(()=>{
-        axiosSecure.get(`/users/${user.email}`)
+        axiosSecure.get(`/users/${user?.email}`)
         .then(res=>{
             setAdmin(res.data.admin)
         })
