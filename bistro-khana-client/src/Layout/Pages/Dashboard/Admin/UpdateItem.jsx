@@ -17,7 +17,7 @@ const UpdateItem = () => {
     const item = useLoaderData();
     const { name, price, recipe, category, _id } = item;
     const onSubmit = (data) => {
-        console.log(data);
+        
         const image = data.image[0];
         formdata.append('image', image)
         axiosurl.post(imagebburl, formdata)
@@ -28,7 +28,7 @@ const UpdateItem = () => {
                     recipe: data.recipe,
                     category: data.category,
                     image: imgUrl,
-                    price: data.price
+                    price: parseFloat(data.price)
                 }
                 axiosSecure.patch(`/menu/${_id}`, updateData)
                     .then(result => {
@@ -88,7 +88,7 @@ const UpdateItem = () => {
                 <div className=' flex flex-col justify-center items-center gap-6 mt-10'>
 
                     <div className='flex justify-center gap-2 px-5 py-3 items-center text-white  bg-linear-to-l from-[#B58130] to-[#835D23] '>
-                        <input type="submit" value={"Update Recipe Detail"} className='btn-ghost ' />
+                        <input type="submit" value={"Update Recipe Detail"} className= ' ' />
                     </div>
                 </div>
 

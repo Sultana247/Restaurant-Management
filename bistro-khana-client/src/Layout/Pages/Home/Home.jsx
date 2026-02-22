@@ -19,7 +19,7 @@ import { Navigation } from 'swiper/modules';
 import { Link } from 'react-router';
 import {Helmet} from "react-helmet";
 const Home = () => {
-    const { menu } = useMenu();
+    const [ menu ] = useMenu();
     const { reviews } = useReview();
     const popular = menu.filter(item => item.category === 'popular');
 

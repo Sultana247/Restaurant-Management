@@ -3,6 +3,7 @@ import React from 'react';
 import SharedTitle from '../../../../../components/SharedTitle';
 import useCart from '../../../../../hooks/useCart';
 import CartItem from './CartItem';
+import { Link } from 'react-router';
 
 const Cart = () => {
     const [cart]=useCart();
@@ -16,7 +17,12 @@ const Cart = () => {
                 <div className='font-bold text-3xl flex justify-between mb-5'>
                     <h3>Total Orders: {cart.length}</h3>
                 <h3>Total Price: ${totalprice}</h3>
-                <button className='dashboard-bg px-5 py-2 rounded-lg text-xl text-white'>Pay</button>
+                {cart.length ? 
+                <Link className=''  to={'/dashboard/payment'}><button className='btn btn-warning dashboard-bg px-5 py-2 rounded-lg text-xl text-white'>Pay</button></Link> 
+                :
+                <>
+                    <button disabled className='btn btn-disabled px-5 py-2 rounded-lg text-xl text-white'>Pay</button>
+                </>}
                 </div>
             <table className="table ">
                 

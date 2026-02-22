@@ -16,6 +16,7 @@ import PrivateAdminRoute from "./PrivateAdminRoute";
 import AddItems from "../Layout/Pages/Dashboard/Admin/AddItems";
 import ManageItem from "../Layout/Pages/Dashboard/Admin/ManageItem";
 import UpdateItem from "../Layout/Pages/Dashboard/Admin/UpdateItem";
+import Payment from "../Layout/Pages/Dashboard/Client/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/userHome",
         element: <h2>User home</h2>
+      },
+      {
+        path: "/dashboard/payment",
+        element: <Payment></Payment>
       },
       {
         path: "/dashboard/reservation",
