@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router';
 import AuthContext from '../../Provider/AuthContext';
 import Swal from 'sweetalert2';
@@ -12,12 +12,14 @@ const Navbar = () => {
     const [cart] = useCart();
      const [admin, setAdmin]= useState(false);
     const axiosSecure = useAxiosSecure();
-    useEffect(()=>{
+     if(user){
         axiosSecure.get(`/users/${user?.email}`)
         .then(res=>{
             setAdmin(res.data.admin)
         })
-    })
+     }
+        
+   
     const handleSignOut = () => {
         logout()
             .then(() => {
@@ -64,7 +66,7 @@ const Navbar = () => {
             :
             <NavLink to={`/dashboard/carts`} className='uppercase font-bold text-xl inter-font'><li>
                 <button className="btn">
-                    <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{cart.length}</div>
+                    <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{user ? cart.length : 0}</div>
                 </button>
             </li></NavLink>}
 

@@ -55,6 +55,7 @@ async function run() {
     const reviewsCollection = client.db("BistroBoss").collection("reviews");
     const cartCollection = client.db("BistroBoss").collection('cart');
     const userCollection = client.db("BistroBoss").collection('users');
+    const paymentCollection = client.db("BistroBoss").collection('payment');
 
 // verify admin middleware
 const verifyAdmin = async(req, res, next)=>{
@@ -140,7 +141,7 @@ const verifyAdmin = async(req, res, next)=>{
       
     });
 
-
+   
     // Menu api
     app.get('/menu', async(req, res)=>{
         const result = await menuCollection.find({}).toArray();
@@ -216,17 +217,36 @@ const verifyAdmin = async(req, res, next)=>{
 
     // payment session
     app.post('/create-payment-intent', async(req, res)=>{
-      const {price, quantity}=req.body;
-      console.log(price, quantity)
+      const {amount, customer}=req.body;
+      const taka = parseInt(amount*100);
+      
      const paymentIntent = await stripe.paymentIntents.create({
-      amount: parseInt(price*100),
+      amount: taka,
       currency: 'usd',
-      payment_method_types: ['card']
+      payment_method_types: ['card'],
+     
      });
-     console.log('paid')
-     res.send({clientSecret: paymentIntent.client_secret,})
+     
+     res.send({clientSecret: paymentIntent.client_secret, paymentIntent})
     });
 
+ // payments api
+    app.post('/payments', verifyToken, async(req, res)=>{
+      const paymentInfo = req.body;
+      const result = await paymentCollection.insertOne(paymentInfo);
+      const query = {_id: {
+        $in: paymentInfo.cartIds.map(id=> new ObjectId(id))
+      }};
+      const deleteResult = await cartCollection.deleteMany(query);
+      res.send({result, deleteResult});
+    });
+
+    app.get('/payments/:email', async(req, res)=>{
+      const email = req.params.email;
+      const query = {email: email}
+      const result = await paymentCollection.find(query).toArray();
+      res.send(result)
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

@@ -49,7 +49,7 @@ const Dashboard = () => {
                                     <>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={`/dashboard/userHome`}><FaHome></FaHome> User home</NavLink></li>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/reservation'}><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
-                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/payment'}><FaWallet></FaWallet> Payment History</NavLink></li>
+                                        <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/paymentHistory'}><FaWallet></FaWallet> Payment History</NavLink></li>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/carts'}><FaShoppingCart></FaShoppingCart> My Cart</NavLink></li>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/review'}><BiSolidMessageAltDetail /> Add Review</NavLink></li>
                                         <li><NavLink className={'  focus:outline-2 focus:text-white focus:outline-offset-2 focus:outline-violet-500 '} to={'/dashboard/myBooking'}><FaCalendarDay></FaCalendarDay> My Booking</NavLink></li>

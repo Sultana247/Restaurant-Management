@@ -16,7 +16,9 @@ import PrivateAdminRoute from "./PrivateAdminRoute";
 import AddItems from "../Layout/Pages/Dashboard/Admin/AddItems";
 import ManageItem from "../Layout/Pages/Dashboard/Admin/ManageItem";
 import UpdateItem from "../Layout/Pages/Dashboard/Admin/UpdateItem";
-import Payment from "../Layout/Pages/Dashboard/Client/Payment";
+import Payment from "../Layout/Pages/Dashboard/Client/Payments/Payment";
+import PaymentSuccess from "../Layout/Pages/Dashboard/Client/Payments/PaymentSuccess";
+import PaymentHistory from "../Layout/Pages/Dashboard/Client/Payments/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -68,13 +70,19 @@ export const router = createBrowserRouter([
         element: <Payment></Payment>
       },
       {
+        path: "/dashboard/paymentcomplete",
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path: "/dashboard/paymentHistory",
+        element: <PaymentHistory></PaymentHistory>
+      },
+
+      {
         path: "/dashboard/reservation",
         element: <h2>Reservation</h2>
       },
-      {
-        path: "/dashboard/payment",
-        element: <h2>Payment</h2>
-      },
+     
       {
         path: "/dashboard/myBooking",
         element: <h2>my bookings</h2>
