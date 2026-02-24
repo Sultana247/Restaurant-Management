@@ -105,7 +105,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/updateitem/:id",
         element: <PrivateAdminRoute><UpdateItem></UpdateItem></PrivateAdminRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
+        loader: ({params})=> fetch(`https://bistro-khana-server.vercel.app/menu/${params.id}`)
       },
       {
         path: "/dashboard/manageitems",

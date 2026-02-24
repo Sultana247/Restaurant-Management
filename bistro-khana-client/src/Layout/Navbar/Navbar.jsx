@@ -65,14 +65,17 @@ const Navbar = () => {
                 </>
                 :
                 <>
-                    {user && <NavLink to={`/dashboard/userHome`} className='uppercase font-bold text-xl inter-font'><li>
+                    {user && 
+                    <>
+                    <NavLink to={`/dashboard/userHome`} className='uppercase font-bold text-xl inter-font'><li>
                         <button className='btn'>User Dashboard</button>
-                    </li></NavLink>}
+                    </li></NavLink>
                     <NavLink to={`/dashboard/carts`} className='uppercase font-bold text-xl inter-font'><li>
                         <button className="btn">
                             <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{user ? cart.length : 0}</div>
                         </button>
                     </li></NavLink>
+                    </>}
                 </>
             }
 

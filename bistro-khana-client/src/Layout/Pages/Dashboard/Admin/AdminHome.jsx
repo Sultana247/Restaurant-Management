@@ -95,33 +95,14 @@ const AdminHome = () => {
     const MyCustomPie = (props) => {
         return <Sector {...props} fill={COLORS[props.index % COLORS.length]} />;
     };
- const renderCustomLegend = (props) => {
-  const { payload } = props;
-
-  return (
-    <ul style={{ listStyle: 'none', padding: 0, display: 'flex', justifyContent: 'center', gap: '10px' }}>
-      {payload.map((entry, index) => (
-        <li key={`item-${index}`} style={{ display: 'flex', alignItems: 'center' }}>
-          {/* This renders the square icon with the dynamic color */}
-          <div 
-            style={{ 
-              width: '12px', 
-              height: '12px', 
-              backgroundColor: COLORS[index % COLORS.length], 
-              marginRight: '5px' 
-            }} 
-          />
-          {/* This renders the category name */}
-          <span style={{ color: '#333' }}>{entry.value}</span>
-        </li>
-      ))}
-    </ul>
-  );
-};
+    const dynamicData = pieObj.map((item, index) => ({
+        ...item,
+        fill: COLORS[index % COLORS.length] // Assign a permanent color
+    }));
     // 
     return (
         <div>
-            <h2 className='text-5xl font-bold pt-15 pb-15'>HI, Welcome Back</h2>
+            <h2 className='text-2xl md:text-5xl font-bold pt-25 md:pt-15 pb-15'>HI, Welcome Back</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
                 <div className="stats shadow">
                     <div className="stat px-12 py-12 flex justify-center items-center gap-4 bg-linear-to-r from-[#BB34F5] to-[#FCDBFF]">
@@ -215,25 +196,31 @@ const AdminHome = () => {
                 </div>
                 {/* pie chart */}
                 <div className='w-1/2'>
-                    <PieChart style={{ width: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }}>
+                    <PieChart style={{ width: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }} responsive>
                         <Pie
-                            data={pieObj}
+                            data={dynamicData}
                             labelLine={false}
                             label={renderCustomizedLabel}
 
                             dataKey="value"
                             nameKey="name"
                             isAnimationActive={true}
-                            
+
                             shape={(props) => {
-      const fill = COLORS[props.index % COLORS.length];
-      return <MyCustomPie {...props} fill={fill} />;
-    }}
+                                // Use the fill we just attached to the data
+                                return <MyCustomPie {...props} fill={props.payload.fill} />;
+                            }}
                         >
 
                         </Pie>
-                        <Legend content={renderCustomLegend}
-                            
+                        <Tooltip />
+                        <Legend
+                            payload={dynamicData.map((item) => ({
+                                id: item.name,
+                                type: 'square',
+                                value: item.name,
+                                color: item.fill // This is now dynamic but STABLE
+                            }))}
                         />
 
                     </PieChart>

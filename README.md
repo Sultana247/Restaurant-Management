@@ -12,6 +12,13 @@ Features
 9. used react recaptcha in login page
 10. used sweet alert
 11. Aded cart where customers can add to cart and pay with stripe payment system
+12. user dashboard and admin dashbord
+13. admin can manage users, make any user to admin, add or delete user or menu items
+
+Here is the live link
+https://bistro-boss-f42be.web.app
+
+
 =======
 
 >>>>>>> 3f895ac641a1371d614a7715d01c830f84389e9c

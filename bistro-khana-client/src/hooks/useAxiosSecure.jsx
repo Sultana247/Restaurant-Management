@@ -5,7 +5,7 @@ import AuthContext from '../Provider/AuthContext';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://bistro-khana-server.vercel.app'
 });
 const useAxiosSecure = () => {
     const { logout}=useContext(AuthContext);

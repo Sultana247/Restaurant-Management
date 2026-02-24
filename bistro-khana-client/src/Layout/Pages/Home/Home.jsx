@@ -54,7 +54,7 @@ const Home = () => {
             </div>
             {/* parallex part featured part */}
             <div
-                className="hero h-[700px] bg-fixed "
+                className="hero h-[1100px] md:h-[700px] bg-fixed mb-95 md:mb-5 "
                 style={{
                     backgroundImage:
                         `url(${featureimg})`,
@@ -85,7 +85,7 @@ const Home = () => {
                 </div>
             </div>
             {/* Testimoniala */}
-            <SharedTitle headline={"testimonials"} subheadline={"What Our Clients Say"}></SharedTitle>
+            <SharedTitle  headline={"testimonials"} subheadline={"What Our Clients Say"}></SharedTitle>
             
             <div className='max-w-7xl mx-auto'>
                 <Swiper navigation={true} modules={[Navigation]} className="mySwiper ">

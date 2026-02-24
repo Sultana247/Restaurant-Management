@@ -19,8 +19,8 @@ const UserHome = () => {
     
     return (
         <div>
-            <h2 className='text-5xl font-bold pt-15 pb-15'>HI, Welcome Back</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className='text-2xl md:text-5xl  font-bold pt-25 md:pt-15 pb-15'>HI, Welcome Back</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
                 <div className="stats shadow">
                     <div className="stat px-24 py-12 flex justify-center items-center gap-4 bg-linear-to-r from-[#BB34F5] to-[#FCDBFF]">
                         <div>

@@ -15,7 +15,7 @@ const MakePayment = () => {
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
        if(totalPrice > 0){
-         fetch("http://localhost:5000/create-payment-intent", {
+         fetch("https://bistro-khana-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: parseFloat(totalPrice), customer: user?.email }),
