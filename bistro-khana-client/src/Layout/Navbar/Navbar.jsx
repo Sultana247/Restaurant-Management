@@ -7,19 +7,19 @@ import useCart from '../../hooks/useCart';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Navbar = () => {
-    
+
     const { user, logout } = useContext(AuthContext);
     const [cart] = useCart();
-     const [admin, setAdmin]= useState(false);
+    const [admin, setAdmin] = useState(false);
     const axiosSecure = useAxiosSecure();
-     if(user){
+    if (user) {
         axiosSecure.get(`/users/${user?.email}`)
-        .then(res=>{
-            setAdmin(res.data.admin)
-        })
-     }
-        
-   
+            .then(res => {
+                setAdmin(res.data.admin)
+            })
+    }
+
+
     const handleSignOut = () => {
         logout()
             .then(() => {
@@ -57,18 +57,24 @@ const Navbar = () => {
             <NavLink to={'/contactus'} className='uppercase font-bold text-xl inter-font'><li>Contact us</li></NavLink>
             <NavLink to={'/ourmenu'} className='uppercase font-bold text-xl inter-font'><li>Our menu</li></NavLink>
             <NavLink to={`/ourshop/salad`} className='uppercase font-bold text-xl inter-font'><li>Our Shop</li></NavLink>
-            {admin ? 
-            <>
-            <NavLink to={`/dashboard/adminHome`} className='uppercase font-bold text-xl inter-font'><li>
-                <button className='btn'>Admin Dashboard</button>
-                </li></NavLink>
-            </> 
-            :
-            <NavLink to={`/dashboard/carts`} className='uppercase font-bold text-xl inter-font'><li>
-                <button className="btn">
-                    <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{user ? cart.length : 0}</div>
-                </button>
-            </li></NavLink>}
+            { admin ?
+                <>
+                    <NavLink to={`/dashboard/adminHome`} className='uppercase font-bold text-xl inter-font'><li>
+                        <button className='btn'>Admin Dashboard</button>
+                    </li></NavLink>
+                </>
+                :
+                <>
+                    {user && <NavLink to={`/dashboard/userHome`} className='uppercase font-bold text-xl inter-font'><li>
+                        <button className='btn'>User Dashboard</button>
+                    </li></NavLink>}
+                    <NavLink to={`/dashboard/carts`} className='uppercase font-bold text-xl inter-font'><li>
+                        <button className="btn">
+                            <FaShoppingCart></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{user ? cart.length : 0}</div>
+                        </button>
+                    </li></NavLink>
+                </>
+            }
 
         </>
     return (

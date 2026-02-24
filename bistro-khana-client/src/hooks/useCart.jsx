@@ -15,7 +15,7 @@ const useCart = () => {
                 const res = await axiosSecure.get(`/carts?email=${user?.email}`)
                 return res.data
             }
-            return []
+            
         }
     })
     return [cart, refetch]
